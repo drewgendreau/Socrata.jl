@@ -1,4 +1,4 @@
-function dataframe(url::String, fulldataset::Bool, fieldIDsAsCols::Bool, header_args::Dict, query_args::Dict)
+function dataframe(url::String, fulldataset::Bool, usefieldids::Bool, header_args::Dict, query_args::Dict)
 
     if fulldataset == true
         println("Getting full data set, ignoring all query parameters\n")
@@ -8,7 +8,7 @@ function dataframe(url::String, fulldataset::Bool, fieldIDsAsCols::Bool, header_
     end
 
     #println(response.status)
-    println(response.headers)
+    #println(response.headers)
     #println(response.data)
 
     checkErrors(response)
@@ -27,10 +27,15 @@ function dataframe(url::String, fulldataset::Bool, fieldIDsAsCols::Bool, header_
     # Socrata exports missing values using the string term "NULL"
     # Need to convert "NULL" values to NA
 
-    # TODO: implement for when fulldataset is true
-    if fieldIDsAsCols == true
-        new_colnames = getFieldIDs(response)
+    if usefieldids == true
+
+        new_colnames = getFieldIDs(url, fulldataset, header_args)
+        
+        println("DF Names: ", names(df), "\n")
+        println("NewCols: ", new_colnames, "\n")
+
         names!(df, new_colnames)
+
     end
 
     return df

@@ -41,7 +41,7 @@ function createURL(url::String, fulldataset::Bool)
         # with the limit parameter set to something (defaults to 1000)
         # and will also use any query_args specified by the user
 
-        return_url = "https://$domain/resource/$socrata_id"
+        return_url = "https://$domain/resource/$socrata_id.csv?"
     end
 
     return return_url
@@ -62,16 +62,33 @@ function checkErrors(response)
 
 end
 
-function getFieldIDs(response)
-    # Gets field IDs from data and returns them as ..
+function getFieldIDs(url, fulldataset, header_args)
+    # Gets field IDs from data and returns them as a vector of symbols
 
-    # TODO: is there an easier way to do this?
-    # Use filter and regex to take out anything that's not an alphanum character or underscore?
+    if fulldataset == true
+        url = replace(url, "api/views", "resource")
+        url = replace(url, "/rows.csv?accessType=DOWNLOAD", ".xml?")
+    else
+        url = replace(url, ".csv", ".xml")
+    end
 
-    fields = get(response.headers, "X-SODA2-Fields", "")
+    println("URL: ", url)
 
-    fieldvec = matchall(r"[:a-zA-Z_0-9]+", fields)
-    fieldvec = reverse(filter!(x -> !ismatch(r":", x), fieldvec))
+    # Just pull one row of data in XML
+    query_args = {"\$limit" => "1", "\$select" => "*"}
+    response = get(url, headers = header_args, query = query_args)
+
+    #println("Response.data: ")
+    println(response.data)
+
+    # Create vector of field names (XML nodes, children)   
+    fieldvec = matchall(r"[<][^/]*?[>]", response.data)
+
+    # Remove <response>, <row>, <, and > from each element 
+    filter!(x -> !ismatch(r"(<response>|<row>)", x), fieldvec)
+    fieldvec = map(x -> replace(x, r"[<>]", ""), fieldvec)
+
+    # Convert each element from string to symbol
     fieldvec = map(symbol, fieldvec)
 
     return fieldvec

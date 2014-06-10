@@ -9,7 +9,7 @@ function socrataget(url::String;
                     limit::String="",
                     offset::String="",
                     fulldataset::Bool=false,
-                    fieldIDsAsCols::Bool=true)
+                    usefieldids::Bool=false)
 
     # create format
     if format == "DataFrame"
@@ -24,20 +24,26 @@ function socrataget(url::String;
         error("Invalid format: $format.  Must be equal to csv, json, or rdf-xml.")
     end
 
+
+    if float(limit) < 1 || float(limit) > 1000
+        error("Limit out of bounds.  Must be greater than 0 and less than or equal to 1000.")
+    end
+
     # Create a dictionary with the Header and Query args for the get function
     header_args = {"X-App-Token" => app_token, "Accept" => format}
     
-    query_args = {"\$\$app_token" => app_token, "\$limit" => limit,
-                     "\$offset" => offset, "\$select" => lowercase(select), 
-                     "\$where" => where, "\$order" => order,
-                     "\$group" => group, "\$q" => q}
+    query_args = {"\$limit" => limit, "\$offset" => offset, "\$select" => lowercase(select), 
+                     "\$where" => where, "\$order" => order, "\$group" => group, "\$q" => q}
     
     url = createURL(url, fulldataset)
 
-    df = dataframe(url, fulldataset, fieldIDsAsCols, header_args, query_args)
+    df = dataframe(url, fulldataset, usefieldids, header_args, query_args)
    
     return df
 end
+
+
+
 
 # make socrata an alias for socrataget
 socrata = socrataget
