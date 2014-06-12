@@ -29,12 +29,14 @@ function dataframe(url::String, fulldataset::Bool, usefieldids::Bool, header_arg
 
     if usefieldids == true
 
-        new_colnames = getFieldIDs(url, fulldataset, header_args)
+        # new_colnames = getFieldIDs(url, fulldataset, header_args)
         
-        println("DF Names: ", names(df), "\n")
-        println("NewCols: ", new_colnames, "\n")
+        # println("DF Names: ", names(df), "\n")
+        # println("NewCols: ", new_colnames, "\n")
 
-        names!(df, new_colnames)
+        # names!(df, new_colnames)
+
+        println("usefieldids has not yet been implemented.")
 
     end
 

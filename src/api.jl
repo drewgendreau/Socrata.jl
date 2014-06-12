@@ -6,7 +6,7 @@ function socrataget(url::String;
                     order::String="",
                     group::String="",
                     q::String="",
-                    limit::String="",
+                    limit::String="100",
                     offset::String="",
                     fulldataset::Bool=false,
                     usefieldids::Bool=false)
@@ -41,9 +41,6 @@ function socrataget(url::String;
    
     return df
 end
-
-
-
 
 # make socrata an alias for socrataget
 socrata = socrataget

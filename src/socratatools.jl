@@ -62,35 +62,38 @@ function checkErrors(response)
 
 end
 
-function getFieldIDs(url, fulldataset, header_args)
-    # Gets field IDs from data and returns them as a vector of symbols
 
-    if fulldataset == true
-        url = replace(url, "api/views", "resource")
-        url = replace(url, "/rows.csv?accessType=DOWNLOAD", ".xml?")
-    else
-        url = replace(url, ".csv", ".xml")
-    end
+# TODO: Need to wait for Socrata to fix bug with CSV headers before implementing this
 
-    println("URL: ", url)
+# function getFieldIDs(url, fulldataset, header_args)
+#     # Gets field IDs from data and returns them as a vector of symbols
 
-    # Just pull one row of data in XML
-    query_args = {"\$limit" => "1", "\$select" => "*"}
-    response = get(url, headers = header_args, query = query_args)
+#     if fulldataset == true
+#         url = replace(url, "api/views", "resource")
+#         url = replace(url, "/rows.csv?accessType=DOWNLOAD", ".xml?")
+#     else
+#         url = replace(url, ".csv", ".xml")
+#     end
 
-    #println("Response.data: ")
-    println(response.data)
+#     println("URL: ", url)
 
-    # Create vector of field names (XML nodes, children)   
-    fieldvec = matchall(r"[<][^/]*?[>]", response.data)
+#     # Just pull one row of data in XML
+#     query_args = {"\$limit" => "1", "\$select" => "*"}
+#     response = get(url, headers = header_args, query = query_args)
 
-    # Remove <response>, <row>, <, and > from each element 
-    filter!(x -> !ismatch(r"(<response>|<row>)", x), fieldvec)
-    fieldvec = map(x -> replace(x, r"[<>]", ""), fieldvec)
+#     #println("Response.data: ")
+#     println(response.data)
 
-    # Convert each element from string to symbol
-    fieldvec = map(symbol, fieldvec)
+#     # Create vector of field names (XML nodes, children)   
+#     fieldvec = matchall(r"[<][^/]*?[>]", response.data)
 
-    return fieldvec
+#     # Remove <response>, <row>, <, and > from each element 
+#     filter!(x -> !ismatch(r"(<response>|<row>)", x), fieldvec)
+#     fieldvec = map(x -> replace(x, r"[<>]", ""), fieldvec)
 
-end
+#     # Convert each element from string to symbol
+#     fieldvec = map(symbol, fieldvec)
+
+#     return fieldvec
+
+# end
