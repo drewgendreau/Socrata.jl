@@ -40,7 +40,7 @@ There are several optional keyword string arguments:
 * `fulldataset` ignores all query parameters including `limit`, `offset`, and any of the Socrata Query Language (SoQL) arguments and downloads the entire dataset.
 * `usefieldids` is not yet implemented, but will substitute the default human-readable column headers with API field IDs.
 
-#### Socrata Query Language (SoQL) arguments
+#### Socrata Query Language (SoQL) Arguments
 
 Socrata.jl supports [SoQL queries](http://dev.socrata.com/docs/queries.html) using the following arguments:
 
