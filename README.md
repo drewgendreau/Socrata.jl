@@ -34,25 +34,21 @@ The `url` may be a [Socrata API Endpoint](http://dev.socrata.com/docs/endpoints.
 
 There are several optional keyword string arguments:
 
-`app_token` is your [Socrata application token](http://dev.socrata.com/docs/app-tokens.html) which allows for more API requests per unit of time
-
-`limit` is equal to the number of rows in the dataset you would like to retrieve.  Default is equal to 100, max is equal to 1,000 (Socrata's limit).  If you want to download a large dataset, set `fulldataset=true` (see below).
-
-`offset` indicates the first row from which to start pulling data.
-
-`fulldataset` ignores all query parameters including `limit`, `offset`, and any of the Socrata Query Language (SoQL) arguments and downloads the entire dataset.
-
-`usefieldids` is not yet implemented, but will substitute the default human-readable column headers with API field IDs.
+* `app_token` is your [Socrata application token](http://dev.socrata.com/docs/app-tokens.html) which allows for more API requests per unit of time
+* `limit` is equal to the number of rows in the dataset you would like to retrieve.  Default is equal to 100, max is equal to 1,000 (Socrata's limit).  If you want to download a large dataset, set `fulldataset=true` (see below).
+* `offset` indicates the first row from which to start pulling data.
+* `fulldataset` ignores all query parameters including `limit`, `offset`, and any of the Socrata Query Language (SoQL) arguments and downloads the entire dataset.
+* `usefieldids` is not yet implemented, but will substitute the default human-readable column headers with API field IDs.
 
 #### Socrata Query Language (SoQL) arguments
 
 Socrata.jl supports [SoQL queries](http://dev.socrata.com/docs/queries.html) using the following arguments:
 
-*`select`
-*`where`
-*`order`
-*`group`
-*`q`
+* `select`
+* `where`
+* `order`
+* `group`
+* `q`
 * `limit` and `offset` as described above.
 
 Note that any references to columns inside these arguments must reference the dataset`s API Field ID, which can be found on any Socrata dataset page under Export => SODA API => Column IDs.
