@@ -2,7 +2,7 @@
 
 Socrata.jl is a Julia wrapper for accessing the Socrata Open Data API (http://dev.socrata.com) and importing data into a DataFrame.  Socrata is an open data platform used by many local and State governments as well as by the Federal Government.  For example, some popular Socrata repositories include:
 
-* [Socrata`s Open Data Site](https://opendata.socrata.com)
+* [Socrata's Open Data Site](https://opendata.socrata.com)
 * [HealthCare.gov Health Plans](https://www.healthcare.gov/health-plan-information)
 * [Centers for Medicare & Medicaid Services](https://data.cms.gov)
 * [New York City OpenData](https://nycopendata.socrata.com)
