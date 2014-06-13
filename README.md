@@ -28,6 +28,7 @@ The `url` may be a [Socrata API Endpoint](http://dev.socrata.com/docs/endpoints.
 * http://soda.demo.socrata.com/resource/4334-bgaj.json
 * http://soda.demo.socrata.com/resource/4334-bgaj.csv
 * https://soda.demo.socrata.com/dataset/USGS-Earthquakes-for-2012-11-01-API-School-Demo/4334-bgaj
+
 ## Optional Arguments
 
 #### Basic Arguments
