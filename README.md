@@ -12,8 +12,6 @@ More Open Data Resources can be found [here](http://www.socrata.com/resources/)
 ## Installation
 ````julia
 Pkg.clone("https://github.com/dreww2/Socrata.jl.git")
-
-using Socrata
 ````
 
 ## Basic Usage
@@ -21,6 +19,8 @@ using Socrata
 The Socrata API consists of a single function, `socrata`, which at a minimum takes a Socrata `url` and returns a `DataFrame`:
 
 ````julia
+using Socrata
+
 df = socrata("http://soda.demo.socrata.com/resource/4334-bgaj")
 ````
 
