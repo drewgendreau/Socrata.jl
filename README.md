@@ -35,7 +35,7 @@ julia> df = socrata("http://soda.demo.socrata.com/resource/4334-bgaj")
 
 ````
 
-The `url` may be a [Socrata API Endpoint](http://dev.socrata.com/docs/endpoints.html) or may be common url found in the address bar (in which case Socrata.jl will automatically attempt to parse the string into a usable format).  For example, the following are all valid urls for the same dataset:
+The `url` may be a [Socrata API Endpoint](http://dev.socrata.com/docs/endpoints.html) or may be the URL from the address bar (in which case Socrata.jl will automatically attempt to parse the string into a usable format).  For example, the following are all valid urls for the same dataset:
 
 * http://soda.demo.socrata.com/resource/4334-bgaj
 * http://soda.demo.socrata.com/resource/4334-bgaj.json
