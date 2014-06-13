@@ -1,8 +1,8 @@
+using DataFrames
+
 module Socrata
     
-export socrataget, 
-       socrata
-       
+export socrata       
 
 using Requests, DataFrames
 

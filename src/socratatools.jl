@@ -15,8 +15,7 @@ end
 
 function createURL(url::String, fulldataset::Bool)
     # Creates a valid URL to pass to GET
-    # if full
-
+    
     # split the inital URL
     temp_url = split(url, r"https?://")[2]
 
@@ -58,6 +57,8 @@ function checkErrors(response)
         error("Error: ", msg.args[3].args[2])
     elseif response.status == 404
         error("Error 404: Dataset Not Found. Check URL?")
+    elseif contains(chomp(response.data), "\n") == false
+        error("Error: Empty dataset")
     end
 
 end

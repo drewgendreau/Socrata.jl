@@ -1,4 +1,4 @@
-function socrataget(url::String;
+function socrata(url::String;
                     app_token::String="",
                     format::String="DataFrame",
                     select::String="",
@@ -41,6 +41,3 @@ function socrataget(url::String;
    
     return df
 end
-
-# make socrata an alias for socrataget
-socrata = socrataget
