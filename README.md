@@ -55,8 +55,6 @@ Socrata.jl supports [SoQL queries](http://dev.socrata.com/docs/queries.html) usi
 Note that any references to columns inside these arguments must reference the dataset's API Field ID, which can be found on any Socrata dataset page under Export => SODA API => Column IDs.
 ## Examples
 
-Setup
-
 ````julia
 using Socrata
 
@@ -65,13 +63,11 @@ token = "your_app_token_goes_here"
 `````
 
 A basic query, getting the first 5 rows:
-
 ````julia
 df = socrata(url, app_token=token, limit="5")
 ````
 
 Get rows 5-10 of the data:
-
 ````julia
 df = socrata(url, app_token=token, limit="5", offset="5")
 ````
@@ -87,7 +83,6 @@ df = socrata(url, app_token=token, where="magnitude > 5.5 AND depth < 30")
 ````
 
 Search for `Hawaii` in the dataset where Magnitude > 2 and only select certain columns:
-
 ````julia
 df = socrata(url, app_token=token, q="hawaii", where="magnitude > 2", select="datetime, magnitude, region, location")
 ````
