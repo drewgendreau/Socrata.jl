@@ -52,7 +52,7 @@ Socrata.jl supports [SoQL queries](http://dev.socrata.com/docs/queries.html) usi
 * `q`
 * `limit` and `offset` as described above.
 
-Note that any references to columns inside these arguments must reference the dataset`s API Field ID, which can be found on any Socrata dataset page under Export => SODA API => Column IDs.
+Note that any references to columns inside these arguments must reference the dataset's API Field ID, which can be found on any Socrata dataset page under Export => SODA API => Column IDs.
 ## Examples
 
 Setup
