@@ -24,7 +24,7 @@ The Socrata API consists of a single function, `socrata`, which at a minimum tak
 df = socrata("http://soda.demo.socrata.com/resource/4334-bgaj")
 ````
 
-The `url` may be a [Socrata API Endpoint] or may be common url found in the address bar (in which case Socrata.jl will automatically attempt to parse the string into a usable format).  For example, the following are all valid urls for the same dataset:
+The `url` may be a [Socrata API Endpoint](http://dev.socrata.com/docs/endpoints.html) or may be common url found in the address bar (in which case Socrata.jl will automatically attempt to parse the string into a usable format).  For example, the following are all valid urls for the same dataset:
 
 `http://soda.demo.socrata.com/resource/4334-bgaj`
 `http://soda.demo.socrata.com/resource/4334-bgaj.json`
@@ -101,3 +101,10 @@ df = socrata(url, app_token=token, q="Hawaii")
 ````julia
 df = socrata(url, app_token=token, q="hawaii", where="magnitude > 2", select="datetime, magnitude, region, location")
 ````
+
+## TODO
+
+* Add support for automatically getting API Field IDs
+* Implement better app_token system
+* Add support for JSON and XML
+
