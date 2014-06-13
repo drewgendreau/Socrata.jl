@@ -17,9 +17,22 @@ Pkg.clone("https://github.com/dreww2/Socrata.jl.git")
 The Socrata API consists of a single function, `socrata`, which at a minimum takes a Socrata `url` and returns a `DataFrame`:
 
 ````julia
-using Socrata
+julia> using Socrata
 
-df = socrata("http://soda.demo.socrata.com/resource/4334-bgaj")
+julia> df = socrata("http://soda.demo.socrata.com/resource/4334-bgaj")
+100x9 DataFrame
+|-------|--------------------|------------|---------|
+| Col # | Name               | Eltype     | Missing |
+| 1     | Source             | UTF8String | 0       |
+| 2     | Earthquake_ID      | UTF8String | 0       |
+| 3     | Version            | UTF8String | 0       |
+| 4     | Datetime           | UTF8String | 0       |
+| 5     | Magnitude          | Float64    | 0       |
+| 6     | Depth              | Float64    | 0       |
+| 7     | Number_of_Stations | Int64      | 0       |
+| 8     | Region             | UTF8String | 0       |
+| 9     | Location           | UTF8String | 0       |
+
 ````
 
 The `url` may be a [Socrata API Endpoint](http://dev.socrata.com/docs/endpoints.html) or may be common url found in the address bar (in which case Socrata.jl will automatically attempt to parse the string into a usable format).  For example, the following are all valid urls for the same dataset:
