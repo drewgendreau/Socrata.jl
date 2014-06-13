@@ -7,10 +7,6 @@ function dataframe(url::String, fulldataset::Bool, usefieldids::Bool, header_arg
         response = get(url, headers = header_args, query = query_args)
     end
 
-    #println(response.status)
-    #println(response.headers)
-    #println(response.data)
-
     checkErrors(response)
 
     buffer = PipeBuffer()
