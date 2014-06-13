@@ -7,13 +7,11 @@ Socrata.jl is a Julia wrapper for accessing the Socrata Open Data API (http://de
 * [Centers for Medicare & Medicaid Services](https://data.cms.gov)
 * [New York City OpenData](https://nycopendata.socrata.com)
 
-More Open Data Resources can be found [here](http://www.socrata.com/resources/)
-
+More Open Data Resources can be found [here](http://www.socrata.com/resources/).
 ## Installation
 ````julia
 Pkg.clone("https://github.com/dreww2/Socrata.jl.git")
 ````
-
 ## Basic Usage
 
 The Socrata API consists of a single function, `socrata`, which at a minimum takes a Socrata `url` and returns a `DataFrame`:
@@ -30,7 +28,6 @@ The `url` may be a [Socrata API Endpoint](http://dev.socrata.com/docs/endpoints.
 * http://soda.demo.socrata.com/resource/4334-bgaj.json
 * http://soda.demo.socrata.com/resource/4334-bgaj.csv
 * https://soda.demo.socrata.com/dataset/USGS-Earthquakes-for-2012-11-01-API-School-Demo/4334-bgaj
-
 ## Optional Arguments
 
 #### Basic Arguments
@@ -59,7 +56,6 @@ Socrata.jl supports [SoQL queries](http://dev.socrata.com/docs/queries.html) usi
 And `limit` and `offset` as described above.
 
 > Note that any references to columns inside these arguments must reference the dataset`s API Field ID, which can be found on any Socrata dataset page under Export => SODA API => Column IDs.
-
 ## Examples
 
 Setup
@@ -98,7 +94,6 @@ Search for `Hawaii` in the dataset where Magnitude > 2 and only select certain c
 ````julia
 df = socrata(url, app_token=token, q="hawaii", where="magnitude > 2", select="datetime, magnitude, region, location")
 ````
-
 ## TODO
 
 * Add support for automatically getting API Field IDs
