@@ -48,14 +48,14 @@ There are several optional keyword string arguments:
 
 Socrata.jl supports [SoQL queries](http://dev.socrata.com/docs/queries.html) using the following arguments:
 
-`select`
-`where`
-`order`
-`group`
-`q`
-And `limit` and `offset` as described above.
+*`select`
+*`where`
+*`order`
+*`group`
+*`q`
+* `limit` and `offset` as described above.
 
-> Note that any references to columns inside these arguments must reference the dataset`s API Field ID, which can be found on any Socrata dataset page under Export => SODA API => Column IDs.
+Note that any references to columns inside these arguments must reference the dataset`s API Field ID, which can be found on any Socrata dataset page under Export => SODA API => Column IDs.
 ## Examples
 
 Setup
