@@ -6,8 +6,8 @@ function socrata(url::String;
                     order::String="",
                     group::String="",
                     q::String="",
-                    limit::String="100",
-                    offset::String="",
+                    limit::String="0",
+                    offset::String="0",
                     fulldataset::Bool=false,
                     usefieldids::Bool=false)
 
@@ -24,9 +24,15 @@ function socrata(url::String;
         error("Invalid format: $format.  Must be equal to csv, json, or rdf-xml.")
     end
 
+    try
+        float(limit)
+    catch
+        error("Limit needs to be an integer within a string (ex: \"100\")")
+    end
 
-    if float(limit) < 1 || float(limit) > 1000
-        error("Limit out of bounds.  Must be greater than 0 and less than or equal to 1000.")
+
+    if float(limit) < 0
+        error("Limit out of bounds.  Must be greater than or equal to 0.")
     end
 
     # Create a dictionary with the Header and Query args for the get function

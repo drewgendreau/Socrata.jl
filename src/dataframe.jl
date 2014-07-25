@@ -1,23 +1,35 @@
 function dataframe(url::String, fulldataset::Bool, usefieldids::Bool, header_args::Dict, query_args::Dict)
 
-    if fulldataset == true
-        println("Getting full data set, ignoring all query parameters\n")
-        response = get(url)
-    else
-        response = get(url, headers = header_args, query = query_args)
-    end
-
-    checkErrors(response)
-
     buffer = PipeBuffer()
     df = DataFrame()
 
-    try
-        write(buffer, response.data)
-        df = readtable(buffer)
-    finally
-        close(buffer)
+
+    if fulldataset == true
+        response = get(url)
+        checkErrors(response)
+        
+        try
+            write(buffer, response.data)
+            df = readtable(buffer)
+        finally
+            close(buffer)
+        end
+
+    else
+        # call getPagedData, which pages through multi-page requests
+
+        write_data = getPagedData(url, header_args, query_args)
+    
+        try
+            write(buffer, write_data)
+            df = readtable(buffer)
+        finally
+            close(buffer)
+        end
+
     end
+
+    
 
     # TODO:
     # Socrata exports missing values using the string term "NULL"

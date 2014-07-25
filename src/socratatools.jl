@@ -98,3 +98,60 @@ end
 #     return fieldvec
 
 # end
+
+
+function getPagedData(url, header_args, query_args)
+
+    # TODO: what happens if a data request is completely empty?
+
+    # init an empty return value
+    write_data = utf8("")
+ 
+    # set some initial parameters
+    total_limit = int(query_args["\$limit"])
+    limit_counter = total_limit
+    starting_offset = query_args["\$offset"]
+    cont = true
+    first_pass = true
+
+    if total_limit > 1000 || total_limit == 0
+        query_args["\$limit"] = 1000
+    end
+
+    # loop through and continually make get requests as long as:
+    #    1) we haven't reached the user's set limit
+    #    2) we haven't hit the end of the data from server
+
+    while cont == true
+
+        response = get(url, headers = header_args, query = query_args)
+
+        # if the data request is empty, we know we're done...
+        if contains(chomp(response.data), "\n") == false
+            break
+        end
+
+        checkErrors(response)
+
+        # Gets rid of additional headers that are generated from each request
+        if first_pass == false
+            write_data = write_data * response.data[(searchindex(response.data, "\n")+1):end]
+        else
+            write_data = write_data * response.data
+        end
+
+        # change a bunch of parameters to see whether loop continues
+        if total_limit != 0
+            limit_counter = limit_counter - 1000
+            if limit_counter < 0
+                cont = false
+            end
+        end
+        first_pass = false
+        query_args["\$offset"] = string(int(query_args["\$offset"]) + 1000)
+
+    end
+
+    return write_data
+
+end
